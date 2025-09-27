@@ -7,53 +7,48 @@ let temperature = document.querySelector(".temperature");
 let humidity = document.querySelector(".humidity");
 let wind = document.querySelector(".wind-speed");
 
-//arr to push obj
-const arr = [];
-//btn click event for api call
-let btnClick = btn.addEventListener("click", () => {
-  let input = city.value;
+// core fetch function
+function fetchWeather() {
+  let input = city.value.trim();
 
-  // check if the input is epmty or not
   if (input === "") {
-    return alert("please write carefully");
+    alert("Please enter a city name");
+    return;
   }
 
-  // api starts from here
   const apiKey = "ed4146785e6b49daa24161520240609";
 
   fetch(
-    `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city.value}&aqi=no`
+    `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${input}&aqi=no`
   )
     .then((res) => {
       if (!res.ok) {
-        throw new Error(
-          "There might be a problem with api it's probably :",
-          res.ok
-        );
+        throw new Error("Problem with API request");
       }
       return res.json();
     })
     .then((data) => {
-      //made arry of obj to access the item easy we can also access it via data
-
-      arr.push(data);
-      let arrObj = arr.map((item) => {
-        loc.innerText = item.location.name;
-        weatherIcon.src = `${item.current.condition.icon}`;
-        temperature.innerText = `${item.current.feelslike_c}C`;
-        humidity.innerText = item.current.humidity;
-        return item;
-      });
+      // Update UI
+      loc.innerText = `${data.location.name}, ${data.location.country}`;
+      weatherIcon.src = data.current.condition.icon;
+      temperature.innerText = `${data.current.feelslike_c}°C`;
+      humidity.innerText = `Humidity: ${data.current.humidity}%`;
+      wind.innerText = `Wind: ${data.current.wind_kph} kph`;
     })
     .catch((error) => {
-      console.log("there is an errr", error);
+      console.log("Error:", error);
     });
 
   city.value = "";
-});
+}
 
+// Button click
+btn.addEventListener("click", fetchWeather);
+
+// Enter key
 city.addEventListener("keydown", (e) => {
-  if (e.key === "enter") {
-    btnClick();
+  if (e.key === "Enter") {
+    e.preventDefault();
+    fetchWeather();
   }
 });
