@@ -36,8 +36,28 @@ const users = [
 const adults = users.filter((item)=> item.age > 18).map(data=>{
     return data.name
 })
-console.log(adults)
+// console.log(adults)
 
 // ✅ Task 1: filter only users >= 18
 // ✅ Task 2: map their names into a new array
 // Expected: ["Alice", "Charlie"]
+
+
+
+const cart = [
+  { item: "Shirt", price: 20, qty: 2 },
+  { item: "Pants", price: 30, qty: 1 },
+  { item: "Shoes", price: 50, qty: 1 }
+];
+
+const show = cart.map(item=> `${item.item} x${item.qty} = $${item.price}`);
+console.log(show)
+
+const add = cart.reduce((acc,curr)=>{
+    return acc + curr.price*curr.qty
+},0)
+console.log(add)
+// ✅ Task 1: map each item to show "Shirt x2 = $40" style strings
+// ✅ Task 2: reduce to calculate total cart value
+// Expected: ["Shirt x2 = $40", "Pants x1 = $30", "Shoes x1 = $50"]
+// Total: 120
