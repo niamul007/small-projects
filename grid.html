@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grid box</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #74ebd5 0%, #9face6 100%);
+        color: #333;
+        width: 100vw;
+      }
+
+      .grid-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 60px;
+        width: 100%;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr); /* 4 columns */
+        grid-auto-rows: 150px; /* default row height */
+        gap: 10px;
+      }
+
+      .grid-item {
+        overflow: hidden;
+        border-radius: 12px;
+        position: relative;
+      }
+
+      .grid-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      /* Big image spans 2 columns and 2 rows */
+      .grid-item.large {
+        grid-column: span 2;
+        grid-row: span 2;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grid-container">
+      <div class="grid">
+        <div class="grid-item">
+          <img
+            src="https://i.pinimg.com/736x/16/ca/5c/16ca5cd1b7acaf4e7fade587f269165d.jpg"
+            alt=""
+          />
+        </div>
+        <div class="grid-item">
+          <img
+            src="https://i.pinimg.com/736x/c2/0f/2c/c20f2c6e4ee44e076cdab234c8974dbf.jpg"
+            alt=""
+          />
+        </div>
+        <div class="grid-item">
+          <img
+            src="https://i.pinimg.com/1200x/22/14/5a/22145aa685cfc1d5b229b893af827d92.jpg"
+            alt=""
+          />
+        </div>
+        <div class="grid-item">
+          <img
+            src="https://i.pinimg.com/736x/11/aa/91/11aa911a964ebf502be5d3a43639498b.jpg"
+            alt=""
+          />
+        </div>
+        <div class="grid-item large">
+          <img
+            src="https://i.pinimg.com/1200x/81/3d/c7/813dc78a3416bcfef972373f24b7004a.jpg"
+            alt=""
+          />
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
