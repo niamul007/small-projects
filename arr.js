@@ -6,8 +6,22 @@ const products = [
     { id: 105, name: "Monitor", category: "Electronics", price: 300 }
 ];
 
+function updateProductPrice(arr,id,newPrice){
+    let newer = arr.map(item=>{
+        if(item.id === id){
+            return {...item, price:newPrice};
+        }else{
+            return item;
+        }
+    })
+    return newer;
+}
+
+console.log(updateProductPrice(products,101,1500));
+console.log(products)
+
 const usingDes = products.filter(item=> item.category === "Electronics").map(({name,price})=> `${name} - ${price}`);
-console.log(usingDes)
+// console.log(usingDes)
 
 function getProductNames(arrOfObj){
     let newArr = arrOfObj.map(item=>{
