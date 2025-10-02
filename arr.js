@@ -6,7 +6,8 @@ const products = [
     { id: 105, name: "Monitor", category: "Electronics", price: 300 }
 ];
 
-
+const usingDes = products.filter(item=> item.category === "Electronics").map(({name,price})=> `${name} - ${price}`);
+console.log(usingDes)
 
 function getProductNames(arrOfObj){
     let newArr = arrOfObj.map(item=>{
@@ -14,7 +15,7 @@ function getProductNames(arrOfObj){
     })
     return newArr;
 }
-console.log(getProductNames(products))
+// console.log(getProductNames(products))
 
 
 
@@ -43,7 +44,7 @@ const scores = {
     Eve: 75
 };
 let obj = Object.keys(scores).filter(key => scores[key] >= 70);
-console.log(obj)
+// console.log(obj)
 
 
 
@@ -57,7 +58,7 @@ function createSummary(product){
         }
     }
 }
-console.log(createSummary(products));
+// console.log(createSummary(products));
 
 
 
