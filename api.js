@@ -113,4 +113,56 @@ async function reciveName(person) {
     }
 }
 
-reciveName("Niamul");
+// reciveName("Niamul");
+
+
+function authenticateUser(username, password){
+  return new Promise((resolve,reject)=>{
+    setTimeout(()=>{
+      if(username === "admin" && password === "password123"){
+        resolve(`You are allowed`)
+      }else{
+        reject(new Error("You are not allowed"));
+      }
+    },2000);
+  });
+}
+
+async function handleLogin(user,pass){
+  console.log("Checking in progress....")
+  try{
+    let checking = await authenticateUser(user, pass);
+    console.log(`✅ Welcome back ${checking}`)
+  }catch(error){
+    console.error(`❌ Login failed: ${error.message}`)
+  }
+}
+
+// handleLogin("adminniamul","password123");
+
+function checkJobStatus(jobId){
+  return new Promise((resolve,reject)=>{
+    setTimeout(()=>{
+      if(Number(jobId) %2===0){
+        ("Job ID " + jobId + " is complete.");
+      }else if( Number(jobId) === 999){
+        reject(new Error("Server timeout during status check."))
+      }
+      else{
+        resolve("Job ID " + jobId + " is still processing...")
+      }
+    },2000)
+  })
+}
+
+async function monitorJob(id){
+  console.log("Searching......");
+  try{
+    let check = await checkJobStatus(id);
+    console.log(`Result: ${check}`);
+  }catch(error){
+    console.error(`Faild : ${error.message}`)
+  }
+}
+
+monitorJob(999);
