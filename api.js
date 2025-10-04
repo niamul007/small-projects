@@ -103,66 +103,104 @@ function getName(userName) {
   });
 }
 
-
 async function reciveName(person) {
-    try{
-        let grantedPerson = await getName(person);
-        console.log(`You have permission ${grantedPerson}`)
-    }catch(error){
-        console.error(`Sorry you are not allowed : ${error.message}`)
-    }
+  try {
+    let grantedPerson = await getName(person);
+    console.log(`You have permission ${grantedPerson}`);
+  } catch (error) {
+    console.error(`Sorry you are not allowed : ${error.message}`);
+  }
 }
 
 // reciveName("Niamul");
 
-
-function authenticateUser(username, password){
-  return new Promise((resolve,reject)=>{
-    setTimeout(()=>{
-      if(username === "admin" && password === "password123"){
-        resolve(`You are allowed`)
-      }else{
+function authenticateUser(username, password) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (username === "admin" && password === "password123") {
+        resolve(`You are allowed`);
+      } else {
         reject(new Error("You are not allowed"));
       }
-    },2000);
+    }, 2000);
   });
 }
 
-async function handleLogin(user,pass){
-  console.log("Checking in progress....")
-  try{
+async function handleLogin(user, pass) {
+  console.log("Checking in progress....");
+  try {
     let checking = await authenticateUser(user, pass);
-    console.log(`✅ Welcome back ${checking}`)
-  }catch(error){
-    console.error(`❌ Login failed: ${error.message}`)
+    console.log(`✅ Welcome back ${checking}`);
+  } catch (error) {
+    console.error(`❌ Login failed: ${error.message}`);
   }
 }
 
 // handleLogin("adminniamul","password123");
 
-function checkJobStatus(jobId){
-  return new Promise((resolve,reject)=>{
-    setTimeout(()=>{
-      if(Number(jobId) %2===0){
-        ("Job ID " + jobId + " is complete.");
-      }else if( Number(jobId) === 999){
-        reject(new Error("Server timeout during status check."))
+function checkJobStatus(jobId) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (Number(jobId) % 2 === 0) {
+        "Job ID " + jobId + " is complete.";
+      } else if (Number(jobId) === 999) {
+        reject(new Error("Server timeout during status check."));
+      } else {
+        resolve("Job ID " + jobId + " is still processing...");
       }
-      else{
-        resolve("Job ID " + jobId + " is still processing...")
-      }
-    },2000)
-  })
+    }, 2000);
+  });
 }
 
-async function monitorJob(id){
+async function monitorJob(id) {
   console.log("Searching......");
-  try{
+  try {
     let check = await checkJobStatus(id);
     console.log(`Result: ${check}`);
-  }catch(error){
-    console.error(`Faild : ${error.message}`)
+  } catch (error) {
+    console.error(`Faild : ${error.message}`);
   }
 }
 
-monitorJob(999);
+// monitorJob(999);
+
+// practice 3
+
+function fetchItemId(productName) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (productName === "Towel") {
+        resolve(45);
+      } else {
+        reject(new Error("Product name didn't matched"));
+      }
+    },1000);
+  });
+}
+
+function fetchItemPrice(itemId) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (itemId === 45) {
+        resolve("The price is $99.");
+      } else {
+        reject(new Error("Product ID didn't matched"));
+      }
+    }, 1000);
+  });
+}
+
+async function getFinalPrice(name) {
+  console.log("Searching...");
+  try {
+    let getName = await fetchItemId(name);
+    let getPrice = await fetchItemPrice(getName);
+    console.log(`Product name is : ${getName}`);
+    console.log(getPrice);
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
+
+getFinalPrice("Towel");
