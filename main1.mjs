@@ -6,11 +6,11 @@ async function tryChceker(userCheck) {
     console.log("Searching users....");
     try{
         const getName = await loginService(userCheck);
-        console.log(getName);
+        console.log(`${getName} you can try ${MAX_LOGIN_ATTEMPTS} times to log in`);
     }
     catch(error){
         console.error(error.message)
     }
 }
 
-tryChceker("Niaml");
+tryChceker("Niamul");
