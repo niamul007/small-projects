@@ -58,18 +58,91 @@
 // NOTE: You CANNOT call this on an instance: myCar.getDefaultWheels() would fail.
 
 
-class Name{
-    constructor(userName,calledName){
-        this.userName =userName;
-        this.calledName = calledName;
-    }
+// class Name{
+//     constructor(userName,calledName){
+//         this.userName =userName;
+//         this.calledName = calledName;
+//     }
 
-    callUser(){
-        return `User name is ${this.userName} and he is called by ${this.calledName}`;
+//     callUser(){
+//         return `User name is ${this.userName} and he is called by ${this.calledName}`;
+//     }
+// }
+
+
+// const myName = new Name ("Niamul","Jihad");
+
+// console.log(myName.callUser());
+
+
+class User{
+    constructor(UserName,email){
+        this.UserName = UserName;
+        this.email = email;
+    }
+    getInfo(){
+        return `User name is: ${this.UserName}\nUser eamil is: ${this.email}`
     }
 }
 
+const userData = new User("Niamul","am3994566@gmail.comm");
 
-const myName = new Name ("Niamul","Jihad");
+console.log(userData.getInfo());
 
-console.log(myName.callUser());
+
+// 1. The Parent/Superclass (Your Existing Code)
+class User {
+    constructor(username, email) {
+        this.username = username;
+        this.email = email;
+    }
+
+    getInfo() {
+        return `User: ${this.username}, Email: ${this.email}`;
+    }
+}
+
+// ----------------------------------------------------------------------
+
+// 2. The Child/Subclass (The New Code for Inheritance)
+// The 'extends' keyword links Admin to User.
+class Admin extends User {
+    // The constructor accepts all parent properties PLUS the new child property (accessLevel).
+    constructor(username, email, accessLevel) {
+        
+        // 🔑 Rule 1: 'super()' MUST be the first line in the child constructor.
+        // It calls the PARENT's (User's) constructor to handle initialization 
+        // of 'username' and 'email'.
+        super(username, email); 
+
+        // 🔑 Rule 2: Initialize the new, specialized property specific to Admin.
+        this.accessLevel = accessLevel;
+    }
+
+    // 3. Method Overriding and Calling the Parent Method
+    // This method has the same name as the parent's, so it overrides it.
+    getInfo() {
+        // Use 'super.getInfo()' to call the parent's implementation
+        // and get the base string.
+        const baseInfo = super.getInfo();
+
+        // Append the specialized information specific to Admin.
+        return `${baseInfo}, Access: ${this.accessLevel}`;
+    }
+}
+
+// ----------------------------------------------------------------------
+
+// 4. Testing the Inheritance
+
+// Create an instance of the Child class
+const adminUser = new Admin("Ali", "ali@admin.com", "Full Management");
+
+// The Admin object inherits 'username' and 'email' from User, 
+// and adds 'accessLevel'.
+console.log(adminUser); 
+// Output: Admin { username: 'Ali', email: 'ali@admin.com', accessLevel: 'Full Management' }
+
+// Call the OVERRIDDEN getInfo() method
+console.log(adminUser.getInfo()); 
+// Output: User: Ali, Email: ali@admin.com, Access: Full Management
