@@ -146,3 +146,6 @@ console.log(adminUser);
 // Call the OVERRIDDEN getInfo() method
 console.log(adminUser.getInfo()); 
 // Output: User: Ali, Email: ali@admin.com, Access: Full Management
+
+
+
