@@ -73,6 +73,7 @@ async function runPipeline(source) {
   } catch (error) {
     console.log(error.message);
   }
+
 }
 
 (runPipeline("server"));
