@@ -29,3 +29,5 @@ console.log(marge)
 // ... Your destructuring code here ...
 const {name : userName} = marge;
 console.log(userName); // Should output "Alex"
+
+
